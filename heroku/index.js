@@ -22,14 +22,14 @@
  app.use(bodyParser.urlencoded({ extended: false }));
  
  var token = process.env.TOKEN || 'token';
- var received_updates = [{ a: 5 `` }];
+ var received_updates = [{ a: 5 }];
  const PORT = 3001;
  let clients = [];
  let facts = [];
  
  app.get('/status', (request, response) => response.json({ clients: clients.length }));
  app.listen(PORT, () => {
-   console.log(`Facts Events service listening at https://richpanel-be.herokuapp.com:${PORT}`)
+   console.log(`Facts Events service listening at http://localhost:${PORT}`)
  })
  
  function eventsHandler(request, response, next) {
