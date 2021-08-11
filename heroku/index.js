@@ -24,8 +24,8 @@
  var token = process.env.TOKEN || 'token';
  var received_updates = [{ a: 5 }];
  const PORT = 3001;
- let clients = [];
- let facts = [];
+ var clients = [];
+ var facts = [];
  
  app.get('/status', (request, response) => response.json({ clients: clients.length }));
  app.listen(PORT, () => {
