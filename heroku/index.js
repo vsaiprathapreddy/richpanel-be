@@ -22,7 +22,7 @@
  app.use(bodyParser.urlencoded({ extended: false }));
  
  var token = process.env.TOKEN || 'token';
- var received_updates = [{ a: 5 }];
+ var received_updates = [];
  const PORT = 3001;
  var clients = [];
  var facts = [];
