@@ -42,7 +42,7 @@
      'Cache-Control': 'no-cache'
    };
    response.writeHead(200, headers);
-   const data = `data: ${JSON.stringify(received_updates)}\n\n`;
+   const data = "data: "+JSON.stringify(received_updates)+"\n\n";
    response.write(data);
  
    const clientId = Date.now();
@@ -54,7 +54,7 @@
    clients.push(newClient);
  
    request.on('close', function(){
-     console.log(`${clientId} Connection closed`);
+     console.log("Connection closed" + clientId);
      clients = clients.filter(function(client) {
        return client.id !== clientId
      });
@@ -63,7 +63,8 @@
  
  function sendEventsToAll(newFact) {
    clients.forEach(function(client) {
-     return client.response.write(`data: ${JSON.stringify(newFact)}\n\n`)
+     const data = "data: "+JSON.stringify(newFact)+"\n\n";
+     return client.response.write(data)
    })
  }
  
