@@ -27,10 +27,13 @@
  var clients = [];
  var facts = [];
  
- app.get('/status', (request, response) => response.json({ clients: clients.length }));
- app.listen(PORT, () => {
-   console.log(`Facts Events service listening at http://localhost:${PORT}`)
+ app.get('/status', function(request, response) {
+   response.json({ clients: clients.length })
  })
+
+ app.listen(PORT, function (){
+  console.log("Listening to the events")
+})
  
  function eventsHandler(request, response, next) {
    const headers = {
@@ -45,19 +48,23 @@
    const clientId = Date.now();
    const newClient = {
      id: clientId,
-     response
+     response: response
    };
  
    clients.push(newClient);
  
-   request.on('close', () => {
+   request.on('close', function(){
      console.log(`${clientId} Connection closed`);
-     clients = clients.filter(client => client.id !== clientId);
+     clients = clients.filter(function(client) {
+       return client.id !== clientId
+     });
    });
  }
  
  function sendEventsToAll(newFact) {
-   clients.forEach(client => client.response.write(`data: ${JSON.stringify(newFact)}\n\n`))
+   clients.forEach(function(client) {
+     return client.response.write(`data: ${JSON.stringify(newFact)}\n\n`)
+   })
  }
  
  app.get('/events', eventsHandler);
